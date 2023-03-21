@@ -1,5 +1,12 @@
 <?php
 
+/**
+ *  Améliorations apportées :
+ *  - Variables remontées au début de la classe
+ *  - Correction de certaines mises en page
+ *  - Déplacement de la condition d'ajout d'un RenterPoint dans le switch pour NEW_RELEASE
+ */
+
 declare(strict_types=1);
 
 
@@ -32,29 +39,29 @@ class Customer
         $result = "Rental Record for " . $this->getName() . "\n";
 
         foreach ($this->rentals as $each){
-           $thisAmount = 0.0;
+            $thisAmount = 0.0;
 
-           /* @var $each Rental */
-           // determines the amount for each line
-           switch($each->getMovie()->getPriceCode()) {
-               case Movie::REGULAR:
-                   $thisAmount += 2;
-                   if($each->getDaysRented() > 2)
-                       $thisAmount += ($each->getDaysRented() - 2) * 1.5;
-                   break;
-               case Movie::NEW_RELEASE:
-                   $thisAmount += $each->getDaysRented() * 3;
-                   if($each->getDaysRented() > 1)
-                       $frequentRenterPoints++;
-                   break;
-               case Movie::CHILDREN:
-                   $thisAmount += 1.5;
-                   if($each->getDaysRented() > 3)
-                       $thisAmount += ($each->getDaysRented() - 3) * 1.5;
-                   break;
-           }
+            /* @var $each Rental */
+            // determines the amount for each line
+            switch($each->getMovie()->getPriceCode()) {
+                case Movie::REGULAR:
+                    $thisAmount += 2;
+                    if($each->getDaysRented() > 2)
+                        $thisAmount += ($each->getDaysRented() - 2) * 1.5;
+                    break;
+                case Movie::NEW_RELEASE:
+                    $thisAmount += $each->getDaysRented() * 3;
+                    if($each->getDaysRented() > 1)
+                        $frequentRenterPoints++;
+                    break;
+                case Movie::CHILDREN:
+                    $thisAmount += 1.5;
+                    if($each->getDaysRented() > 3)
+                        $thisAmount += ($each->getDaysRented() - 3) * 1.5;
+                    break;
+            }
 
-           $frequentRenterPoints++;
+            $frequentRenterPoints++;
 
             $result .= "\t" . $each->getMovie()->getTitle() . "\t" . number_format($thisAmount, 1) . "\n";
             $totalAmount += $thisAmount;

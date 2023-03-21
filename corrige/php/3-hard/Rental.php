@@ -1,5 +1,10 @@
 <?php
 
+/**
+ *  Améliorations apportées :
+ *  - Variables remontées au début de la classe
+ */
+
 declare(strict_types=1);
 
 

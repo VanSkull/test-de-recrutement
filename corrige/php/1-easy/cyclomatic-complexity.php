@@ -1,5 +1,12 @@
 <?php
 
+/**
+ *  Améliorations apportées :
+ *  - Séparation des unités dans un tableau
+ *  - Utilisation d'une boucle 'while'
+ *    => Tant que le nombre supérieur à 1024, on continue la division
+ */
+
 function convertSize($bytes, $precision = 2) {
 
   $units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB', 'HB'];

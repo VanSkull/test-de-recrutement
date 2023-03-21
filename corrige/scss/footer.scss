@@ -1,4 +1,9 @@
-/* Footer.scss */
+/*
+    Améliorations apportées :
+    - Utilisation de l'imbrication SASS
+    - Utilisation d'un mixin pour le text-shadow (élément répétitif)
+*/
+
 @mixin text-shadow($color-shadow: #15FFF5){
     text-shadow: 0.55rem 0.55rem $color-shadow;
 }

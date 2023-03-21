@@ -1,5 +1,11 @@
 <?php
 
+/**
+ *  Améliorations apportées :
+ *  - Simplification des conditions d'assignation de direction et de déplacement
+ *  - Ajout d'une condition à la section 'déplacement' pour éviter les  mauvaises instructions
+ */
+
 declare(strict_types=1);
 
 namespace App;
@@ -19,23 +25,34 @@ class Rover
 
     public function receive(string $commandsSequence): void
     {
-        $directions = ["N" => ["W", "E"], "S" => ["E", "W"], "W" => ["S", "N"], "E" => ["N", "S"]];
-        $movement = ["f" => [0, 1], "b" => [0, -1]];
         $commandsSequenceLenght = strlen($commandsSequence);
 
-        for ($i = 0; $i < $commandsSequenceLenght; $i++) {
+        for ($i = 0; $i < $commandsSequenceLenght; ++$i) {
             $command = substr($commandsSequence, $i, 1);
 
-            if (array_key_exists($command, $directions)) {
-                $this->direction = $directions[$this->direction][$command === "r" ? 1 : 0];
-                
-            } elseif (array_key_exists($command, $movement)) {
-                [$x, $y] = $movement[$command];
-
-                if ($this->direction === "N" || $this->direction === "S") {
-                    $this->y += $y * ($this->direction === "S" ? -1 : 1);
+            if ($command === "l" || $command === "r") {
+                // Rotate Rover
+                if ($this->direction === "N") {
+                    $this->direction = $command === "r" ? "E" : "W";
+                } else if ($this->direction === "S") {
+                    $this->direction = $command === "r" ? "W" : "E";
+                } else if ($this->direction === "W") {
+                    $this->direction = $command === "r" ? "N" : "S";
                 } else {
-                    $this->x += $x * ($this->direction === "W" ? -1 : 1);
+                    $this->direction = $command === "r" ? "S" : "N";
+                }
+            } else if ($command === "f" || $command === "b") {
+                // Displace Rover
+                $displacement = $command === 'f' ? 1 : -1;
+
+                if ($this->direction === "N") {
+                    $this->y += $displacement;
+                } else if ($this->direction === "S") {
+                    $this->y -= $displacement;
+                } else if ($this->direction === "W") {
+                    $this->x -= $displacement;
+                } else {
+                    $this->x += $displacement;
                 }
             }
         }

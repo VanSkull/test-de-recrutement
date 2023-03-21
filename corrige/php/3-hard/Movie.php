@@ -1,5 +1,9 @@
 <?php
 
+/**
+ *  Aucune amélioration apportée
+ */
+
 declare(strict_types=1);
 
 

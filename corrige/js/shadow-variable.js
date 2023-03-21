@@ -1,3 +1,10 @@
+/*
+    Améliorations apportées :
+    - Remplacement des 'var' par des 'let'
+    - Variables renommées pour éviter des confusions
+    - Utilisation d'une variable pour le total de kudos (pour éviter les confusions)
+*/
+
 const articleList = []; // In a real app this list would be full of articles.
 let maxKudos = 5;
 

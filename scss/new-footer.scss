@@ -1,0 +1,25 @@
+/* Footer.scss */
+@mixin text-shadow($color-shadow: #15FFF5){
+    text-shadow: 0.55rem 0.55rem $color-shadow;
+}
+
+#footer{
+    @include text-shadow($color-shadow: #FFFFFF);
+    .form__footer{
+        margin: 1rem;
+        @include text-shadow;
+    }
+    .cgv__footer{
+        margin: 0.5rem;
+        @include text-shadow;
+        .button{
+            margin: 1rem;
+            padding: 1rem;
+            font-size: 1.5rem;
+        }
+    }
+    .cgu__footer{
+        margin: 0.5rem;
+        @include text-shadow;
+    }
+}

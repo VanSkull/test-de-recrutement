@@ -4,6 +4,7 @@
  *  Améliorations apportées :
  *  - Simplification des conditions d'assignation de direction et de déplacement
  *  - Ajout d'une condition à la section 'déplacement' pour éviter les  mauvaises instructions
+ *  - Ajout de 'switch' pour plus de lisibilité dans l'assignation de direction et de déplacement
  */
 
 declare(strict_types=1);
@@ -32,27 +33,37 @@ class Rover
 
             if ($command === "l" || $command === "r") {
                 // Rotate Rover
-                if ($this->direction === "N") {
-                    $this->direction = $command === "r" ? "E" : "W";
-                } else if ($this->direction === "S") {
-                    $this->direction = $command === "r" ? "W" : "E";
-                } else if ($this->direction === "W") {
-                    $this->direction = $command === "r" ? "N" : "S";
-                } else {
-                    $this->direction = $command === "r" ? "S" : "N";
+                switch($this->direction){
+                    case "N":
+                        $this->direction = $command === "r" ? "E" : "W";
+                        break;
+                    case "S":
+                        $this->direction = $command === "r" ? "W" : "E";
+                        break;
+                    case "W":
+                        $this->direction = $command === "r" ? "N" : "S";
+                        break;
+                    case "E":
+                        $this->direction = $command === "r" ? "S" : "N";
+                        break;
                 }
             } else if ($command === "f" || $command === "b") {
                 // Displace Rover
                 $displacement = $command === 'f' ? 1 : -1;
 
-                if ($this->direction === "N") {
-                    $this->y += $displacement;
-                } else if ($this->direction === "S") {
-                    $this->y -= $displacement;
-                } else if ($this->direction === "W") {
-                    $this->x -= $displacement;
-                } else {
-                    $this->x += $displacement;
+                switch($this->direction){
+                    case "N":
+                        $this->y += $displacement;
+                        break;
+                    case "S":
+                        $this->y -= $displacement;
+                        break;
+                    case "W":
+                        $this->x -= $displacement;
+                        break;
+                    case "E":
+                        $this->x += $displacement;
+                        break;
                 }
             }
         }
